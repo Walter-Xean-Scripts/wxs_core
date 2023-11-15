@@ -10,6 +10,7 @@ import { ParagraphTranslator } from "../translators/Paragraph";
 import { SpaceTranslator } from "../translators/Space";
 import { DropdownTranslator } from "../translators/Dropdown";
 import { ImageTranslator } from "../translators/Image";
+import { AutoCompleteTranslator } from "../translators/AutoComplete";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return;
@@ -52,6 +53,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "Dropdown":
                 result.push(DropdownTranslator(elem, uiName))
+                break;
+            case "AutoComplete":
+                result.push(AutoCompleteTranslator(elem, uiName))
                 break;
         }
     }
