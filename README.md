@@ -39,3 +39,6 @@ I highly encurage you to read more about it on our Docs: [Foact Docs](https://do
 Here's a UI we made with Foact:
 https://streamable.com/6hc6g6
 
+## Extra Credits
+- [Overextended](https://github.com/overextended) - For generel ideas and some code. Check them out if you haven't already!
+- [Sh4dow](https://github.com/Sh4dow8080) - For the powershell script for our synchronized scenes module
