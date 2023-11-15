@@ -10,6 +10,10 @@ Want something complicated simplified with our core for your scripts? Reach out 
 We've made some pretty detailed documentation over at https://docs.wxs.gg/, so make sure to read that before asking us questions.
 It *should* cover everything, if not, let us know and we'll fix it.
 
+## Support
+We *might* provide some support on this resource if asked, provided that you've tried to help yourself first.
+Feel free to ask questions in our [Discord Server](https://discord.com/invite/tpJE2854th)!
+
 ## Issues
 Found a bug? Are we missing an important feature?
 Then you're more than welcome to create an issue on this repo. Pull requests are also greatly appreciated.
