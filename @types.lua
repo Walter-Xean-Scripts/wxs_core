@@ -172,3 +172,21 @@
 ---@field onDeselect? fun(id: number, uiName: string, key: string, selectedKeys: string[]) For `Dropdown`.
 ---@field onOpenChange? fun(id: number, uiName: string, open: boolean, info: any) For `Dropdown`.
 ---@field onSubMenuOpenChange? fun(id: number, name: string, openKeys: string[]) For `Dropdown`.
+---@field options? table For `AutoComplete`<p>Options/Suggestions.
+---@field defaultValue? string For `AutoComplete`<p>Default selected value.
+---@field placeholder? string For `AutoComplete`<p>Placeholder string.
+---@filed allowClear? boolean For `AutoComplete`<p>Shows a clear button.
+---@field autoFocus? boolean For `AutoComplete`<p>Focuses the element when its shown
+---@field backfill? boolean For `AutoComplete`<p>Allows user to navigate with keyboard
+---@field bordered? boolean For `AutoComplete`<p>Weather it has a border.
+---@field defaultOpen? boolean For `AutoComplete`<p>When true the autocomplete popup is shown.
+---@field disabled? boolean For `AutoComplete`<p>Weather the autocomplete is disabled
+---@field notFoundContent? string For `AutoComplete`<p>String showed when no suggestion macthes the users input.
+---@field status? "error" | "warning" For `AutoComplete`<p>Sets the outliune of the autocomplete
+---@field onBlur? fun() For `AutoComplete`<p>Fired when the autocomplete is focused.
+---@field onChange? fun(value: strung) For `AutoComplete`<p>Fires when user changes input
+---@field onDropdownVisibleChange? fun(open: boolean) For `AutoComplete`<p>Fires when user opens/closes the popup
+---@field onFocus? fun() For `AutoComplete`<p>Fires when user clicks/focuses the autocomplete
+---@field onSearch? fun(value: string) For `AutoComplete`<p>Works like onChange()...
+---@field onSelect? fun(value: string, option: table) For `AutoComplete`<p>Fires when user select a suggestion/option from autocomplete
+---@field onClear? fun() For `AutoComplete`<p>Fires when user clicks the clear button in autocomplete
