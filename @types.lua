@@ -1,0 +1,174 @@
+---@class AnimDirs
+---@field id number
+---@field dir string | nil
+---@field name string | nil
+---@field animIndex number
+
+---@class SyncronizedScene
+---@field actorsAligned boolean
+---@field deltaZ number
+---@field actorAnims AnimDirs[]
+---@field objectAnims AnimDirs[]
+---@field objects string | nil[]
+---@field cameraAnim AnimDirs
+
+---@class Vector3
+---@field x number
+---@field y number
+---@field z number
+
+---@class SceneHandler
+---@field loadedAnims? table
+---@field loadedModels? table
+---@field sceneData SyncronizedScene
+---@field sceneLocation Vector3
+---@field sceneRotation Vector3
+---@field actors table
+---@field looped boolean
+---@field useDelaZ boolean
+---@field callback? function
+---@field sceneObjects? table
+---@field spawedObjects? table
+---@field shouldDelete? boolean
+---@field sceneId? number
+---@field stopped? boolean
+---@field prevntStop? boolean
+---@field addCamera? boolean
+---@field manualSpawn? boolean
+---@field cam? number
+
+
+---@class CSSProperties
+---@field alignContent string | nil aligns a flex container's lines within the flex container when there is extra space on the cross-axis
+---@field alignItems string | nil aligns items along the cross-axis of a flex container
+---@field alignSelf string | nil aligns a flex item along the cross-axis of the flex container
+---@field aspectRatio string | nil specifies the aspect ratio of an element's box
+---@field backfaceVisibility string | nil determines whether or not the back face of an element is visible when facing the user
+---@field backgroundColor string | nil sets the background color of an element
+---@field borderBottomColor string | nil sets the color of the bottom border of an element
+---@field borderBottomLeftRadius string | nil sets the radius of the bottom-left corner of an element's border
+---@field borderBottomRightRadius string | nil sets the radius of the bottom-right corner of an element's border
+---@field borderBottomWidth string | nil sets the width of the bottom border of an element
+---@field borderColor string | nil sets the color of all four borders of an element
+---@field borderLeftColor string | nil sets the color of the left border of an element
+---@field borderLeftWidth string | nil sets the width of the left border of an element
+---@field borderRadius string | nil sets the radius of all four corners of an element's border
+---@field borderRightColor string | nil sets the color of the right border of an element
+---@field borderRightWidth string | nil sets the width of the right border of an element
+---@field borderStyle string | nil sets the style of all four borders of an element
+---@field borderTopColor string | nil sets the color of the top border of an element
+---@field borderTopLeftRadius string | nil sets the radius of the top-left corner of an element's border
+---@field borderTopRightRadius string | nil sets the radius of the top-right corner of an element's border
+---@field borderTopWidth string | nil sets the width of the top border of an element
+---@field borderWidth string | nil sets the width of all four borders of an element
+---@field bottom string | nil sets the distance between the bottom edge of an element and the bottom edge of its containing element
+---@field color string | nil sets the color of an element's text
+---@field decomposedMatrix string | nil specifies a 2D or 3D transformation matrix for an element
+---@field direction string | nil specifies the direction of an element's text
+---@field display string | nil specifies how an element should be displayed
+---@field elevation string | nil specifies the elevation of an element
+---@field flex string | nil specifies the length of an element's flex item
+---@field flexBasis string | nil specifies the initial length of a flex item
+---@field flexDirection string | nil specifies the direction of the main axis of a flex container
+---@field flexGrow string | nil specifies how much an element should grow relative to the rest of the flex items in the container
+---@field flexShrink string | nil specifies how much an element should shrink relative to the rest of the flex items in the container
+---@field flexWrap string | nil specifies whether flex items should wrap or not when there is not enough room on one line
+---@field fontFamily string | nil specifies the font family of an element's text
+---@field fontSize string | nil specifies the font size of an element's text
+---@field fontStyle string | nil specifies the font style of an element's text
+---@field fontVariant string | nil specifies the font variant of an element's text
+---@field fontWeight string | nil specifies the font weight of an element's text
+---@field height string | nil sets the height of an element
+---@field includeFontPadding string | nil specifies whether an element's font padding should be included in its height
+---@field justifyContent string | nil aligns items along the main axis of a flex container
+---@field left string | nil sets the distance between the left edge of an element and the left edge of its containing element
+---@field letterSpacing string | nil sets the spacing between characters in an element's text
+---@field lineHeight string | nil sets the height of a line of text in an element
+---@field margin string | nil sets the margin of an element on all four sides
+---@field marginBottom string | nil sets the margin of an element on its bottom side
+---@field marginHorizontal string | nil sets the margin of an element on its left and right sides
+---@field marginLeft string | nil sets the margin of an element on its left side
+---@field marginRight string | nil sets the margin of an element on its right side
+---@field marginTop string | nil sets the margin of an element on its top side
+---@field marginVertical string | nil sets the margin of an element on its top and bottom sides
+---@field maxHeight string | nil sets the maximum height of an element
+---@field maxWidth string | nil sets the maximum width of an element
+---@field minHeight string | nil sets the minimum height of an element
+---@field minWidth string | nil sets the minimum width of an element
+---@field opacity string | nil sets the opacity of an element
+---@field overflow string | nil specifies what should happen when an element's content overflows its container
+---@field overlayColor string | nil specifies the color of an element's overlay
+---@field padding string | nil sets the padding of an element on all four sides
+---@field paddingBottom string | nil sets the padding of an element on its bottom side
+---@field paddingHorizontal string | nil sets the padding of an element on its left and right sides
+---@field paddingLeft string | nil sets the padding of an element on its left side
+---@field paddingRight string | nil sets the padding of an element on its right side
+---@field paddingTop string | nil sets the padding of an element on its top side
+---@field paddingVertical string | nil sets the padding of an element on its top and bottom sides
+---@field position string | nil specifies the position of an element
+---@field resizeMode string | nil specifies how an element's content should be resized to fit its container
+---@field right string | nil sets the distance between the right edge of an element and the right edge of its containing element
+---@field rotation string | nil specifies the rotation of an element
+---@field scaleX string | nil specifies the horizontal scaling of an element
+---@field scaleY string | nil specifies the vertical scaling of an element
+---@field shadowColor string | nil specifies the color of an element's shadow
+---@field shadowOffset string | nil specifies the offset of an element's shadow
+---@field shadowOpacity string | nil specifies the opacity of an element's shadow
+---@field shadowRadius string | nil specifies the radius of an element's shadow
+---@field textAlign string | nil specifies the horizontal alignment of an element's text
+---@field textAlignVertical string | nil specifies the vertical alignment of an element's text
+---@field textDecorationColor string | nil specifies the color of an element's text decoration
+---@field textDecorationLine string | nil specifies the type of text decoration to apply to an element's text
+---@field textDecorationStyle string | nil specifies the style of an element's text decoration
+---@field textShadowColor string | nil specifies the color of an element's text shadow
+---@field textShadowOffset string | nil specifies the offset of an element's text shadow
+---@field textShadowRadius string | nil specifies the radius of an element's text shadow
+---@field tintColor string | nil specifies the tint color of an element
+---@field top string | nil sets the distance between the top edge of an element and the top edge of its containing element
+---@field transform string | nil specifies a 2D or 3D transformation to apply to an element
+---@field transformMatrix string | nil specifies a 2D or 3D transformation matrix to apply to an element
+---@field translateX string | nil specifies the horizontal translation of an element
+---@field translateY string | nil specifies the vertical translation of an element
+---@field width string | nil sets the width of an element
+---@field writingDirection string | nil specifies the writing direction of an element's text
+---@field zIndex string | nil sets the z-index of an element
+---@field text? string For `Button`, `Divider`<p>Text displayed.
+---@field onClick? fun(name: string, id: number) Only for: `Button`<p>Function Event, triggered when button is clicked.
+---@field dashed? boolean Only for: `Divider`<p>Makes the divider dashed.
+---@field orientation? "left" | "right" | "center" For `Divider`<p>Position of the title inside the divider.
+---@field orientationMargin? number For `Divider`<p>The margin between the title and the divider's closest border.
+---@field plain? boolean For `Divider`<p>Weather text is shown as plain text.
+---@field type? string For `Button`:<p>string: `primary`, `default`, `dashed`, `text`, `link`<p>For `Divider`:<p>string: `horizontal`, `vertical`
+---@field vertical? boolean For `Flex`:<p>When true the direction of the flex is vertical.<p>For `Slider`:<p>Sets the slider to vertical.
+---@field wrap? boolean For `Flex`:<p>Auto wrap in line.
+---@field justify? string For `Flex`:<p>`flex-start`, `center`, `flex-end`, `space-between`, `space-around`, `space-evenly`.
+---@field align? "flex-start" | "center" | "flex-end" For `Flex`<p>`flex-start`, `center`, `flex-end`.
+---@field gap? string | number For `Flex`<p>`small`, `middle`, `large` are presets. `number` is defaulted to pixels.
+---@field min? number For `Slider`<p>Sets the minimum number.
+---@field max? number For `Slider`<p>Sets the maximum number.
+---@field defaultValue? number For `Slider`<p>Sets the default number.
+---@field disabled? boolean For `Slider`, `Dropdown`:<p>Weather the slider is disabled.
+---@field step? number For `Slider`:<p>Sets the amount for each step in the slider.
+---@field autoFocus? boolean For `Slider`, `Dropdown`<p>When `true` the slider will be focused when opened.
+---@field keyboard? boolean For `Slider`<p>When `true` the slider can be controlled with the keyboard.
+---@field dots? boolean For `Slider`:<p>...
+---@field range? boolean For `Slider`:<p>When `true` the slider has 2 dots to move.
+---@field reverse? boolean For `Slider`:<p>When `true` the slider is reversed.
+---@field direction? "vertical" | "horizontal" For `Space`<p>Sets the directiopn the space has.
+---@field size? 'small' | 'middle' | 'large' | number For `Space`<p>The size between spacing of each element.
+---@field align? "center" | "start" | "end" | "baseline" For `Space`<p>Where the elements are aligned to.
+---@field wrap? boolean For `Space`<p>Auto wrap in line.
+---@field compact? boolean For `Space`<p>Compacts the spacing.
+---@field items? table For `Dropdown`<p>Displayed items in the dropdown.
+---@field placement? "topLeft" | "topCenter" | "topRight" | "bottomLeft" | "bottomCenter" | "bottomRight" | "top" | "bottom" For `Dropdown`<p>Placement of the popup.
+---@field trigger? "contextMenu" | "click" | "hover" For `Dropdown`<p>How the dropdown is triggered.
+---@field type? "button" For `Dropdown`<p>Type of dropdown.
+---@field selectable? boolean For `Dropdown`<p>Enables so user can select items.
+---@field multiple? boolean For `Dropdown`<p>Enables so user can select multiple items.
+---@field defaultSelectedKeys? string[] For `Dropdown`<p>Keys of dropdown that are selected by default.
+---@field triggerSubMenuAction? "click" | "hover" For `Dropdown`<p>How sub-menues are opened.
+---@field onClick? fun(id: number, uiName: string, key: string) For `Dropdown`<p>Function Event, triggered when a child element is selected from a dropdown.
+---@field onSelect? fun(id: number, uiName: string, key: string, selectedKeys: string[]) For `Dropdown`.
+---@field onDeselect? fun(id: number, uiName: string, key: string, selectedKeys: string[]) For `Dropdown`.
+---@field onOpenChange? fun(id: number, uiName: string, open: boolean, info: any) For `Dropdown`.
+---@field onSubMenuOpenChange? fun(id: number, name: string, openKeys: string[]) For `Dropdown`.
