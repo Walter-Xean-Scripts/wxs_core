@@ -253,6 +253,7 @@ local function typewriterEffect(element, fullText, shouldntEnable, cb)
     end)
 end
 
+local currentName = ""
 function Dialogue:SetOptions(...)
     local options = { ... }
     for _, button in pairs(dialogueButtons) do
@@ -275,7 +276,7 @@ function Dialogue:SetOptions(...)
 end
 
 function Dialogue:AddAnswer(answer, cb)
-    local incomingDialogue, _, whatSaying = createPreviousIncomingDialogue("MR JOHANSON", "")
+    local incomingDialogue, _, whatSaying = createPreviousIncomingDialogue(currentName, "")
     previousDialogue:add(incomingDialogue)
     table.insert(previousDialogueElements, incomingDialogue)
 
@@ -297,7 +298,8 @@ local function ZoomInOnPedFace(ped)
 end
 
 function Dialogue:Start(ped, newName, relationship)
-    name.text = newName:upper()
+    currentName = newName:upper()
+    name.text = currentName
     context.text = "👋 " .. relationship:upper()
 
     DialogueMenu:SetActive(true, true)
