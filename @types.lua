@@ -184,9 +184,19 @@
 ---@field notFoundContent? string For `AutoComplete`<p>String showed when no suggestion macthes the users input.
 ---@field status? "error" | "warning" For `AutoComplete`<p>Sets the outliune of the autocomplete
 ---@field onBlur? fun() For `AutoComplete`<p>Fired when the autocomplete is focused.
----@field onChange? fun(value: strung) For `AutoComplete`<p>Fires when user changes input
----@field onDropdownVisibleChange? fun(open: boolean) For `AutoComplete`<p>Fires when user opens/closes the popup
+---@field onChange? fun(id: number, uiName: string, value: strung) For `AutoComplete`<p>Fires when user changes input
+---@field onDropdownVisibleChange? fun(id: number, uiName: string, open: boolean) For `AutoComplete`<p>Fires when user opens/closes the popup
 ---@field onFocus? fun() For `AutoComplete`<p>Fires when user clicks/focuses the autocomplete
----@field onSearch? fun(value: string) For `AutoComplete`<p>Works like onChange()...
----@field onSelect? fun(value: string, option: table) For `AutoComplete`<p>Fires when user select a suggestion/option from autocomplete
+---@field onSearch? fun(id: number, uiName: string, value: string) For `AutoComplete`<p>Works like onChange()...
+---@field onSelect? fun(id: number, uiName: string, value: string, option: table) For `AutoComplete`<p>Fires when user select a suggestion/option from autocomplete
 ---@field onClear? fun() For `AutoComplete`<p>Fires when user clicks the clear button in autocomplete
+---@field text? string For `Checkbox`<p>Text displayed.
+---@field autoFocuz? boolean For `Checkbox`<p>Focuses the element when its shown
+---@field checked? boolean For `Checkbox`<p>Weather the checkbox is checked
+---@field defaultChecked? boolean For `Checkbox`<p>Weather the checkbox is checked by default
+---@field disabled? boolean For `Checkbox`<p>Weather the checkbox is disabled
+---@field indeterminate? boolean For `Checkbox`<p>"The indeterminate checked state of checkbox"
+---@field onChange? fun(id: number, uiName: string, event: table|string[]) For `Checkbox`<p>Fires when user changes the checkbox
+---@field isGroup? boolean For `Checkbox`<p>Weather the checkbox is a group !!Not Requires Options!!
+---@field options? table `Checkbox`<p>Entries for the checkbox group
+---@field defaultValue? string[] For `Checkbox`<p>Default selected values

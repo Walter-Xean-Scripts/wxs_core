@@ -32,7 +32,7 @@ export function AutoCompleteTranslator(element: IAutoComplete, uiName: string) {
     }
 
     if (!element.properties.options) {
-        console.log("AutoComplete: properties.options CAN NOT BE UNDEFINED!")
+        console.log("AutoComplete: properties.options CAN NOT BE UNDEFINED! Source (UI NAME): " + uiName)
         return null;
     }
 

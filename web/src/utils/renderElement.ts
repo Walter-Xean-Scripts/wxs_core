@@ -11,6 +11,7 @@ import { SpaceTranslator } from "../translators/Space";
 import { DropdownTranslator } from "../translators/Dropdown";
 import { ImageTranslator } from "../translators/Image";
 import { AutoCompleteTranslator } from "../translators/AutoComplete";
+import { CheckboxTranslator } from "../translators/Checkbox";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return;
@@ -56,6 +57,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "AutoComplete":
                 result.push(AutoCompleteTranslator(elem, uiName))
+                break;
+            case "Checkbox":
+                result.push(CheckboxTranslator(elem, uiName))
                 break;
         }
     }

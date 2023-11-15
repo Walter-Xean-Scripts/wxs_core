@@ -31,7 +31,9 @@ const relevantReturnProps = [
     "y",
     "s",
     "selectedKeys",
-    "openKeys"
+    "openKeys",
+    "checkedValue",
+    "target",
 ]
 
 function isStringArray(arr: any[]) {
