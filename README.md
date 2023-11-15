@@ -27,7 +27,7 @@ But here's a list of modules included in the core:
 - [Foact](https://docs.wxs.gg/docs/Core/Modules/Foact/) - our LUA UI library
 - [Markers](https://docs.wxs.gg/docs/Core/Modules/Markers/)
 - [Pools](https://docs.wxs.gg/docs/Core/Modules/Pools/)
-- SynchronizedScenes
+- Scenes(https://docs.wxs.gg/docs/Core/Modules/Scenes/) - A library for easily finding and playing synchronized scenes
 - Streaming
 - Vehicle
 
