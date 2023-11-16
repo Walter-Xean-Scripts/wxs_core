@@ -3,6 +3,7 @@ import { Dropdown, MenuProps, Space } from "antd";
 import { fetchNui } from "../utils/fetchNui";
 import * as AIcon from '@ant-design/icons';
 import { GetBindableProps } from "../utils/getBindableProps";
+import React from "react";
 
 interface IDropdown {
     id: string;
@@ -47,7 +48,7 @@ export function DropdownTranslator(element: IDropdown, uiName: string) {
     const triggerSubMenuAction: ITriggerSubMenuAction = element.properties.triggerSubMenuAction || "hover";
 
     return (
-        <>
+        <React.Fragment key={`fragment.dropdown-${element.id}`}>
             {type == undefined && (
                 <Dropdown
                     key={element.id}
@@ -94,6 +95,6 @@ export function DropdownTranslator(element: IDropdown, uiName: string) {
                     </a>
                 </Dropdown.Button>
             )}
-        </>
+        </React.Fragment>
     )
 }

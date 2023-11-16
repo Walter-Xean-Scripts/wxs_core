@@ -29,20 +29,19 @@ export function SpaceTranslator(element: ISpace, uiName: string) {
     const IsCompact: boolean = element.properties.compact || false;
 
     return (
-        <>
-            {!IsCompact && (
+        <React.Fragment key={`fragment.space-${element.id}`}>
+            {!IsCompact ? (
                 <Space
-                    key={element.id}
+                    key={`space-${element.id}`}
                     style={{ ...element.properties }}
                     {...propsFromElementProps}
                     {...GetBindableProps(element.properties)}
                 >
                     {renderElements(element.children, uiName)}
                 </Space>
-            )}
-            {IsCompact && (
+            ) : (
                 <Space.Compact
-                    key={element.id}
+                    key={`space.compact-${element.id}`}
                     style={{ ...element.properties }}
                     {...propsFromElementProps}
                     {...GetBindableProps(element.properties)}
@@ -50,6 +49,6 @@ export function SpaceTranslator(element: ISpace, uiName: string) {
                     {renderElements(element.children, uiName)}
                 </Space.Compact>
             )}
-        </>
+        </React.Fragment>
     )
 }

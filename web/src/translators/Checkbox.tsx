@@ -1,3 +1,4 @@
+import React from "react";
 import { GetBindableProps } from "../utils/getBindableProps";
 import { Checkbox, CheckboxOptionType } from "antd";
 
@@ -35,11 +36,9 @@ export function CheckboxTranslator(element: ICheckbox, uiName: string) {
     }
 
     const options: (string | number | CheckboxOptionType)[] = element.properties.options;
-    const defaultValue: (string | number)[] = element.properties.defaultValue;
-    const value: (string | number | boolean)[] = element.properties.value;
 
     return (
-        <>
+        <React.Fragment key={`fragment.checkbox-${element.id}`}>
             {!isGroup && (
                 <Checkbox
                     key={element.id}
@@ -59,6 +58,6 @@ export function CheckboxTranslator(element: ICheckbox, uiName: string) {
                     options={options}
                 />
             )}
-        </>
+        </React.Fragment>
     )
 }

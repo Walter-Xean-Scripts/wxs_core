@@ -62,7 +62,7 @@ export function InputTranslator(element: IInput, uiName: string) {
     let enterButton: React.ReactNode | string = getInputValueOrIcon(element.properties.enterButton);
 
     return (
-        <>
+        <React.Fragment key={`fragment.input-${element.id}`}>
             {type.toLowerCase() === "input" && (
                 <Input
                     key={element.id}
@@ -94,6 +94,6 @@ export function InputTranslator(element: IInput, uiName: string) {
                     suffix={suffix}
                 />
             )}
-        </>
+        </React.Fragment>
     )
 }
