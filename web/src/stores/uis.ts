@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 
-const initialState = {
+const initialState: IDefaultState = {
     currentlyDisplaying: "",
     uiList: {}
 }
@@ -61,7 +61,7 @@ const uiReducer = (state = initialState, action: { type: string, payload: any })
                 }
             }
         case "UPDATE_UI_BY_ID":
-            const uiData = (state.uiList as any)[action.payload.name];
+            const uiData = state.uiList[action.payload.name];
             if (uiData.id == action.payload.id) {
                 return {
                     ...state,
@@ -92,7 +92,7 @@ const uiReducer = (state = initialState, action: { type: string, payload: any })
                 }
             }
         case "UPDATE_UI_CHILDREN_BY_ID":
-            const uiData2 = (state.uiList as any)[action.payload.name];
+            const uiData2 = state.uiList[action.payload.name];
             if (uiData2.id == action.payload.id) {
                 return {
                     ...state,

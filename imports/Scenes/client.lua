@@ -49,7 +49,8 @@ function SceneHandler.Start(self)
         addZ = self.sceneData.deltaZ
     end
 
-    self.sceneId = NetworkCreateSynchronisedScene(self.sceneLocation.x, self.sceneLocation.y, self.sceneLocation.z + addZ, self.sceneRotation.x, self.sceneRotation.y, self.sceneRotation.z, 2, not self.looped, self.looped, 1.0, 0.0, 1.0);
+    self.sceneId = NetworkCreateSynchronisedScene(self.sceneLocation.x, self.sceneLocation.y, self.sceneLocation.z + addZ,
+        self.sceneRotation.x, self.sceneRotation.y, self.sceneRotation.z, 2, not self.looped, self.looped, 1.0, 0.0, 1.0);
 
     if self.sceneData.actorAnims then
         for index, v in ipairs(self.sceneData.actorAnims) do
@@ -61,19 +62,22 @@ function SceneHandler.Start(self)
         if not self.manualSpawn then
             for index, object in ipairs(self.sceneData.objectAnims) do
                 if self.spawedObjects[index] then
-                    NetworkAddEntityToSynchronisedScene(self.spawedObjects[index], self.sceneId, object.dir, object.name, 8.0, 8.0, 0)
+                    NetworkAddEntityToSynchronisedScene(self.spawedObjects[index], self.sceneId, object.dir, object.name,
+                        8.0, 8.0, 0)
                 else
                     local sceneObject = self.sceneData.objects[index]
-    
+
                     local model = type(sceneObject) == "string" and GetHashKey(sceneObject) or sceneObject
-                    local newObject <const> = CreateObject(model, self.sceneLocation.x, self.sceneLocation.y, self.sceneLocation.z, true, true, false)
+                    local newObject <const> = CreateObject(model, self.sceneLocation.x, self.sceneLocation.y,
+                        self.sceneLocation.z, true, true, false)
                     table.insert(self.spawedObjects, newObject)
                     NetworkAddEntityToSynchronisedScene(newObject, self.sceneId, object.dir, object.name, 8.0, 8.0, 0)
                 end
             end
         else
             for index, object in ipairs(self.sceneData.objectAnims) do
-                NetworkAddEntityToSynchronisedScene(self.spawedObjects[index], self.sceneId, object.dir, object.name, 8.0, 8.0, 0)
+                NetworkAddEntityToSynchronisedScene(self.spawedObjects[index], self.sceneId, object.dir, object.name, 8.0,
+                    8.0, 0)
             end
         end
     end
@@ -82,7 +86,9 @@ function SceneHandler.Start(self)
         self.cam = CreateCam("DEFAULT_ANIMATED_CAMERA", true)
         SetCamActive(self.cam, true)
         RenderScriptCams(true, false, 3000, true, false)
-        PlayCamAnim(self.cam, self.sceneData.cameraAnim.name, self.sceneData.cameraAnim.dir, self.sceneLocation.x, self.sceneLocation.y, self.sceneLocation.z, self.sceneRotation.x, self.sceneRotation.y, self.sceneRotation.z, false, 2)
+        PlayCamAnim(self.cam, self.sceneData.cameraAnim.name, self.sceneData.cameraAnim.dir, self.sceneLocation.x,
+            self.sceneLocation.y, self.sceneLocation.z, self.sceneRotation.x, self.sceneRotation.y, self.sceneRotation.z,
+            false, 2)
     end
 
     if self.looped then
@@ -209,9 +215,9 @@ end
 ---@return SceneHandler
 function SceneHandler.new(prototype)
     local class = {
-        __index = function (self, key)
+        __index = function(self, key)
             if type(prototype[key]) == "function" then
-                return function (...)
+                return function(...)
                     return prototype[key](...)
                 end
             else
@@ -229,7 +235,8 @@ end
 
 --[[
     Usage of our scene handler code above.
-]]--
+]]
+   --
 local sceneHandler = SceneHandler.new(SceneHandler)
 local Scene = {}
 

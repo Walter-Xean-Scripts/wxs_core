@@ -1,12 +1,13 @@
-import { fetchNui } from "../utils/fetchNui";
+import { CSSProperties } from "react";
 import { GetBindableProps } from "../utils/getBindableProps";
 import { renderElements } from "../utils/renderElement";
+
 
 interface IBox {
     id: string;
     name: string;
-    properties: any;
-    children: any[];
+    properties: CSSProperties;
+    children: IFoactElement[];
 }
 
 export function BoxTranslator(element: IBox, uiName: string) {

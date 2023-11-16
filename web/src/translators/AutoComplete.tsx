@@ -1,12 +1,28 @@
 import { GetBindableProps } from "../utils/getBindableProps";
 import { AutoComplete } from "antd";
 import { DefaultOptionType } from "antd/es/select";
+import { CSSProperties } from "react";
+
+interface IProperties extends CSSProperties {
+    options: DefaultOptionType[];
+    placeholder?: string;
+    allowClear?: boolean;
+    autoFocus?: boolean;
+    backfill?: boolean;
+    bordered?: boolean;
+    defaultActiveFirstOption?: boolean;
+    defaultOpen?: boolean;
+    defaultValue?: string;
+    disabled?: boolean;
+    notFoundContent?: string;
+    status?: 'error' | 'warning';
+}
 
 interface IAutoComplete {
     id: string;
     name: string;
-    properties: any;
-    children: any[];
+    properties: IProperties;
+    children: IFoactElement[];
 }
 
 const supportedProps = [
@@ -27,7 +43,7 @@ export function AutoCompleteTranslator(element: IAutoComplete, uiName: string) {
     let propsFromElementProps: any = {};
     for (const prop of Object.keys(element.properties)) {
         if (supportedProps.includes(prop)) {
-            propsFromElementProps[prop] = element.properties[prop];
+            propsFromElementProps[prop] = (element.properties as { [key: string]: any })[prop];
         }
     }
 
@@ -36,7 +52,7 @@ export function AutoCompleteTranslator(element: IAutoComplete, uiName: string) {
         return null;
     }
 
-    const options: DefaultOptionType[] = element.properties.options
+    const options = element.properties.options
 
     const filterOption = (inputValue: string, option: DefaultOptionType): boolean => {
         return (option.value as string).toUpperCase().indexOf(inputValue.toUpperCase()) !== -1;
