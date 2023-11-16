@@ -6,21 +6,26 @@ local responses = {}
 local Logger = WXSCore.Logger
 
 local function callbackResponse(success, result, ...)
-	if not success then
-		if result then
-			return print(('^1SCRIPT ERROR: %s^0\n%s'):format(result , Citizen.InvokeNative(`FORMAT_STACK_TRACE` & 0xFFFFFFFF, nil, 0, Citizen.ResultAsString()) or ''))
-		end
+    if not success then
+        if result then
+            return print(('^1SCRIPT ERROR: %s^0\n%s'):format(result,
+                Citizen.InvokeNative(`FORMAT_STACK_TRACE` & 0xFFFFFFFF, nil, 0, Citizen.ResultAsString()) or ''))
+        end
 
-		return false
-	end
+        return false
+    end
 
-	return result, ...
+    return result, ...
 end
 
 local function doServerCallback(_, event, cb, ...)
     local promise = promise.new()
     id = id + 1
     local currentId = id
+
+    if not cb then
+        cb = function() end
+    end
 
     TriggerServerEvent("WXS:SCB:" .. event, currentId, ...)
 
@@ -54,7 +59,7 @@ end
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function WXSCore.Callbacks.Await(event, ...)
-    return Citizen.Await(doServerCallback(event, false, ...))
+    return Citizen.Await(doServerCallback(nil, event, false, ...))
 end
 
 return WXSCore.Callbacks
