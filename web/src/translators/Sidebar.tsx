@@ -11,6 +11,11 @@ interface IProperties extends CSSProperties {
     defaultSelectedKeys?: string[];
     defaultOpenKeys?: string[];
     items?: any;
+    mode?: "vertical" | "horizontal" | "inline";
+    menuEvents?: any;
+    selectable?: boolean;
+    multiple?: boolean;
+    triggerSubMenuAction: "hover" | "click";
 }
 
 interface ISlider {
@@ -35,7 +40,31 @@ function getItem(
     } as MenuItem;
 }
 
+const supportedProps = [
+    "defaultOpenKeys",
+    "defaultSelectedKeys",
+    "multiple",
+    "openKeys",
+    "selectable",
+    "selectedKeys",
+    "theme",
+    "triggerSubMenuAction",
+
+    "subMenuCloseDelay",
+    "subMenuOpenDelay",
+    "forceSubMenuRender",
+    "inlineCollapsed",
+    "inlineIndent",
+]
+
 export function SidebarTranslator(element: ISlider, uiName: string) {
+    let propsFromElementProps: any = {};
+    for (const prop of Object.keys(element.properties)) {
+        if (supportedProps.includes(prop)) {
+            propsFromElementProps[prop] = (element.properties as { [key: string]: any })[prop];
+        }
+    }
+
     const categories: string[] = [];
     const categoryIcons: string[] = [];
     const categoryIds: string[] = [];
@@ -73,20 +102,16 @@ export function SidebarTranslator(element: ISlider, uiName: string) {
     }
 
     const items = finializedItems;
-
-    const onClick: MenuProps['onClick'] = (e) => {
-        fetchNui("SidebarClick", { sId: e.key, id: element.id, name: uiName })
-    };
-
+    
+    const mode = element.properties.mode || "inline";
+    
     return (
         <Menu
             key={element.id}
-            onClick={onClick}
             style={{ height: "100%", ...element.properties }}
-            defaultSelectedKeys={element.properties.defaultSelectedKeys}
-            defaultOpenKeys={element.properties.defaultOpenKeys}
-            mode="inline"
+            mode={mode}
             items={items}
+            {...propsFromElementProps}
             {...GetBindableProps(element.properties)}
         />
     )
