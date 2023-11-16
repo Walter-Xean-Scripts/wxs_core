@@ -200,3 +200,22 @@
 ---@field isGroup? boolean For `Checkbox`<p>Weather the checkbox is a group !!Not Requires Options!!
 ---@field options? table `Checkbox`<p>Entries for the checkbox group
 ---@field defaultValue? string[] For `Checkbox`<p>Default selected values
+---@field type? "Input"|"Search"|"TextArea" For `Input`<p>Input type
+---@field defaultValue? string For `Input`<p>Default value
+---@field addonAfter? string For `Input`<p>String after input
+---@field addonBefore? string For `Input`<p>String before input
+---@field allowClear? boolean For `Input`<p>Shows a clear button when there is any input
+---@field bordered? boolean For `Input`<p>Weather the input has a border
+---@field disabled? boolean For `Input`<p>Weather the input is disabled
+---@field maxLength? number For `Input`<p>Max allowed length of input
+---@field prefix? string|table For `Input`<p>String or icon before input
+---@field suffix? string|table For `Input`<p>String or icon after input
+---@field showCount? boolean For `Input`<p>Shows the count of characters in the input
+---@field status? "error"|"warning" For `Input`<p>Sets the outline of the input
+---@field size? "large"|"middle"|"small"|number For `Input`<p>Sets the size of the input. When number, its treated as pixels
+---@field onChange? fun(id: number, uiName: string, event: table) For `Input`<p>Fires when user changes the input
+---@field onPressEnter? fun(id: number, uiName: string, event: table) For `Input`<p>Fires when user presses enter on the keyboard
+---@field autoSize? boolean For `Input`(TextArea Only)<p>Auto resize the textarea
+---@field enterButton? table For `Input`(Search Only)<p>Button to show on the right side of the input
+---@field loading? boolean For `Input`(Search Only)<p>Replaces the search with a loading icon
+---@field onSearch? fun(id: number, uiName: string, value: string, event: table, source: table) For `Input`(Search Only)<p>Fires when user presses the search button
