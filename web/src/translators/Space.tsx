@@ -4,7 +4,12 @@ import React, { CSSProperties } from "react";
 import { GetBindableProps } from "../utils/getBindableProps";
 
 interface IProperties extends CSSProperties {
+    direction?: any; // "horizontal" | "vertical"
+    size?: 'small' | 'middle' | 'large' | number;
+    align?: "center" | "start" | "end" | "baseline";
+    wrap?: boolean;
     compact?: boolean;
+    block?: boolean;
 }
 
 interface ISpace {
@@ -15,11 +20,10 @@ interface ISpace {
 }
 
 const supportedProps = [
-    "direction", // "horizontal" | "vertical"
-    "size", // 'small' | 'middle' | 'large' | number | undefined;
-    "align", // "center" | "start" | "end" | "baseline" | undefined
-    "wrap", // boolean
-    //"compact" boolean
+    "direction",
+    "size",
+    "align",
+    "wrap",
 ]
 
 export function SpaceTranslator(element: ISpace, uiName: string) {
@@ -34,7 +38,7 @@ export function SpaceTranslator(element: ISpace, uiName: string) {
 
     return (
         <React.Fragment key={`fragment.space-${element.id}`}>
-            {!IsCompact ? (
+            {!IsCompact && (
                 <Space
                     key={`space-${element.id}`}
                     style={{ ...element.properties }}
@@ -43,7 +47,8 @@ export function SpaceTranslator(element: ISpace, uiName: string) {
                 >
                     {renderElements(element.children, uiName)}
                 </Space>
-            ) : (
+            )}
+            {IsCompact && (
                 <Space.Compact
                     key={`space.compact-${element.id}`}
                     style={{ ...element.properties }}
