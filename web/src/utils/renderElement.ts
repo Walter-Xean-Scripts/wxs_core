@@ -13,6 +13,7 @@ import { ImageTranslator } from "../translators/Image";
 import { AutoCompleteTranslator } from "../translators/AutoComplete";
 import { CheckboxTranslator } from "../translators/Checkbox";
 import { InputTranslator } from "../translators/Input";
+import { PopoverTranslator } from "../translators/Popover";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return;
@@ -64,6 +65,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "Input":
                 result.push(InputTranslator(elem, uiName))
+                break;
+            case "Popover":
+                result.push(PopoverTranslator(elem, uiName))
                 break;
         }
     }

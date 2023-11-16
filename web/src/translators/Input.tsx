@@ -71,16 +71,10 @@ export function InputTranslator(element: IInput, uiName: string) {
     }
 
     const type: IType = element.properties.type || "Input";
-
-    // Prefix handling.
     let prefix: React.ReactNode | string = getInputValueOrIcon(element.properties.prefix);
-
-    // Suffix handling.
     let suffix: React.ReactNode | string = getInputValueOrIcon(element.properties.suffix);
-
-    // Icon/Text handling for "search" button.
     let enterButton: React.ReactNode | string = getInputValueOrIcon(element.properties.enterButton);
-
+    
     return (
         <React.Fragment key={`fragment.input-${element.id}`}>
             {type.toLowerCase() === "input" && (
@@ -90,6 +84,7 @@ export function InputTranslator(element: IInput, uiName: string) {
                     {...propsFromElementProps}
                     {...GetBindableProps(element.properties)}
                     prefix={prefix}
+                    visible={true}
                     suffix={suffix}
                 />
             )}
