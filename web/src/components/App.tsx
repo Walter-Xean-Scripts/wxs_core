@@ -22,6 +22,10 @@ const App: React.FC = () => {
       type: "ADD_TO_UI_LIST",
       payload: data
     });
+
+    if (data.name == currentUI) { // in case we're restarting the UI, we need to update the makeup
+      setCurUIMakeup(uiStore.getState().uiList[data.name]);
+    }
   });
 
   useNuiEvent<{ active: boolean; id: string; }>("setActive", (data) => {
