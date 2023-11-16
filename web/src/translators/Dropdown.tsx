@@ -4,11 +4,25 @@ import { fetchNui } from "../utils/fetchNui";
 import * as AIcon from '@ant-design/icons';
 import { GetBindableProps } from "../utils/getBindableProps";
 import React from "react";
+import { CSSProperties } from "react";
+import { ItemType } from "antd/es/menu/hooks/useItems";
+
+interface IProperties extends CSSProperties {
+    text?: string;
+    trigger?: ITrigger;
+    type?: IType;
+    selectable?: boolean;
+    defaultSelectedKeys?: string[];
+    multiple?: boolean;
+    triggerSubMenuAction?: ITriggerSubMenuAction;
+    menuEvents?: any;
+    items?: any;
+}
 
 interface IDropdown {
     id: string;
     name: string;
-    properties: any;
+    properties: IProperties;
 }
 
 const supportedProps = [
@@ -25,7 +39,7 @@ export function DropdownTranslator(element: IDropdown, uiName: string) {
     let propsFromElementProps: any = {};
     for (const prop of Object.keys(element.properties)) {
         if (supportedProps.includes(prop)) {
-            propsFromElementProps[prop] = element.properties[prop];
+            propsFromElementProps[prop] = (element.properties as { [key: string]: any })[prop];
         }
     }
 
@@ -40,12 +54,12 @@ export function DropdownTranslator(element: IDropdown, uiName: string) {
         items.push({ ...item, icon: Icon ? <Icon /> : undefined })
     }
 
-    const trigger: ITrigger = element.properties.trigger || "click"; // Array - ("contextMenu" | "click" | "hover")[]
+    const trigger = element.properties.trigger || "click"; // Array - ("contextMenu" | "click" | "hover")[]
     const type: IType = element.properties.type || undefined; // "button" | undefined
-    const selectable: boolean = element.properties.selectable || false;
-    const defaultSelectedKeys: string[] = element.properties.defaultSelectedKeys || undefined;
-    const multiple: boolean = element.properties.multiple || true;
-    const triggerSubMenuAction: ITriggerSubMenuAction = element.properties.triggerSubMenuAction || "hover";
+    const selectable = element.properties.selectable || false;
+    const defaultSelectedKeys = element.properties.defaultSelectedKeys || undefined;
+    const multiple = element.properties.multiple || true;
+    const triggerSubMenuAction = element.properties.triggerSubMenuAction || "hover";
 
     return (
         <React.Fragment key={`fragment.dropdown-${element.id}`}>

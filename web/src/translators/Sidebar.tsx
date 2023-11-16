@@ -1,16 +1,22 @@
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import * as AIcon from '@ant-design/icons';
 import { fetchNui } from '../utils/fetchNui';
 import { GetBindableProps } from '../utils/getBindableProps';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
+interface IProperties extends CSSProperties {
+    defaultSelectedKeys?: string[];
+    defaultOpenKeys?: string[];
+    items?: any;
+}
+
 interface ISlider {
     id: string;
     name: string;
-    properties: any;
+    properties: IProperties;
 }
 
 function getItem(

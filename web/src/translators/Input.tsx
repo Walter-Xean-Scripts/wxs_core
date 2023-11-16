@@ -3,13 +3,34 @@ import { GetBindableProps } from "../utils/getBindableProps";
 import { Input } from "antd";
 import * as AIcon from "@ant-design/icons";
 //import { SearchOutlined } from "@ant-design/icons";
-import React from "react";
+import React, { CSSProperties } from "react";
+
+interface IProperties extends CSSProperties {
+    type?: IType;
+    prefix?: { type: string, value: string };
+    suffix?: { type: string, value: string };
+    enterButton?: { type: string, value: string };
+    placeholder?: string;
+    addonBefore?: string;
+    addonAfter?: string;
+    defaultValue?: string;
+    allowClear?: boolean;
+    size?: "large" | "middle" | "small";
+    loading?: boolean;
+    rows?: number;
+    maxLength?: number;
+    autoSize?: boolean;
+    showCount?: boolean;
+    status?: "success" | "warning" | "error" | "validating";
+    bordered?: boolean;
+    disabled?: boolean;
+}
 
 interface IInput {
     id: string;
     name: string;
-    properties: any;
-    children: any[];
+    properties: IProperties;
+    children: IFoactElement[];
 }
 
 const supportedProps = [
@@ -31,7 +52,7 @@ const supportedProps = [
 
 type IType = "Input" | "Search" | "TextArea"
 
-function getInputValueOrIcon(input: {type: string, value: string} | undefined): any {
+function getInputValueOrIcon(input: { type: string, value: string } | undefined): any {
     if (!input) return undefined;
     if (input.type == "icon") {
         console.log(11, "value: ", input.value)
@@ -46,7 +67,7 @@ export function InputTranslator(element: IInput, uiName: string) {
     let propsFromElementProps: any = {};
     for (const prop of Object.keys(element.properties)) {
         if (supportedProps.includes(prop)) {
-            propsFromElementProps[prop] = element.properties[prop];
+            propsFromElementProps[prop] = (element.properties as { [key: string]: any })[prop];
         }
     }
 
@@ -56,7 +77,7 @@ export function InputTranslator(element: IInput, uiName: string) {
     let prefix: React.ReactNode | string = getInputValueOrIcon(element.properties.prefix);
 
     // Suffix handling.
-    let suffix: React.ReactNode | string = getInputValueOrIcon(element.properties.suffix);    
+    let suffix: React.ReactNode | string = getInputValueOrIcon(element.properties.suffix);
 
     // Icon/Text handling for "search" button.
     let enterButton: React.ReactNode | string = getInputValueOrIcon(element.properties.enterButton);
@@ -71,7 +92,7 @@ export function InputTranslator(element: IInput, uiName: string) {
                     {...GetBindableProps(element.properties)}
                     prefix={prefix}
                     suffix={suffix}
-                />   
+                />
             )}
             {type.toLowerCase() === "search" && (
                 <Search

@@ -1,12 +1,21 @@
 import { Flex } from "antd";
 import { renderElements } from "../utils/renderElement";
 import { GetBindableProps } from "../utils/getBindableProps";
+import { CSSProperties } from "react";
+
+interface IProperties extends CSSProperties {
+    vertical?: boolean;
+    justify?: IJustify;
+    align?: IAlign;
+    gap?: IGap;
+    wrap?: "wrap" | undefined;
+}
 
 interface IFlex {
     id: string;
     name: string;
-    properties: any;
-    children: any[];
+    properties: IProperties;
+    children: IFoactElement[];
 }
 
 type IJustify = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly" | undefined;

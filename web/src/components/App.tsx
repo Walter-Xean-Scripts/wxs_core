@@ -15,13 +15,17 @@ debugData([
 
 const App: React.FC = () => {
   const [currentUI, setCurrentUI] = useState<string | null>(null);
-  const [curUIMakeup, setCurUIMakeup] = useState<any>({});
+  const [curUIMakeup, setCurUIMakeup] = useState<IFoactElement | undefined>();
 
-  useNuiEvent<any>("loadUI", (data) => {
+  useNuiEvent<ILoadUIData>("loadUI", (data) => {
     uiStore.dispatch({
       type: "ADD_TO_UI_LIST",
       payload: data
     });
+
+    if (data.name == currentUI) { // in case we're restarting the UI, we need to update the makeup
+      setCurUIMakeup(uiStore.getState().uiList[data.name]);
+    }
   });
 
   useNuiEvent<{ active: boolean; id: string; }>("setActive", (data) => {
@@ -31,7 +35,7 @@ const App: React.FC = () => {
 
       if (currentKeys.includes(data.id)) {
         setCurrentUI(data.id);
-        setCurUIMakeup((curState.uiList as any)[data.id]);
+        setCurUIMakeup(curState.uiList[data.id]);
 
         uiStore.dispatch({
           type: "SET_CURRENTLY_DISPLAYING",
@@ -42,7 +46,7 @@ const App: React.FC = () => {
       }
     } else {
       setCurrentUI(null);
-      setCurUIMakeup({});
+      setCurUIMakeup(undefined);
 
       uiStore.dispatch({
         type: "SET_CURRENTLY_DISPLAYING",
@@ -51,25 +55,25 @@ const App: React.FC = () => {
     }
   });
 
-  useNuiEvent<any>("updateUiById", (data) => {
+  useNuiEvent<IUpdatePropertiesEvent>("updateUiById", (data) => {
     uiStore.dispatch({
       type: "UPDATE_UI_BY_ID",
       payload: data
     });
 
     if (currentUI == data.name) {
-      setCurUIMakeup((uiStore.getState().uiList as any)[data.name]);
+      setCurUIMakeup(uiStore.getState().uiList[data.name]);
     }
   });
 
-  useNuiEvent<any>("updateChildren", (data) => {
+  useNuiEvent<IUpdateChildrenEvent>("updateChildren", (data) => {
     uiStore.dispatch({
       type: "UPDATE_UI_CHILDREN_BY_ID",
       payload: data
     });
 
     if (currentUI == data.name) {
-      setCurUIMakeup((uiStore.getState().uiList as any)[data.name]);
+      setCurUIMakeup(uiStore.getState().uiList[data.name]);
     }
   });
 
