@@ -12,6 +12,7 @@ import { DropdownTranslator } from "../translators/Dropdown";
 import { ImageTranslator } from "../translators/Image";
 import { AutoCompleteTranslator } from "../translators/AutoComplete";
 import { CheckboxTranslator } from "../translators/Checkbox";
+import { InputTranslator } from "../translators/Input";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return;
@@ -60,6 +61,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "Checkbox":
                 result.push(CheckboxTranslator(elem, uiName))
+                break;
+            case "Input":
+                result.push(InputTranslator(elem, uiName))
                 break;
         }
     }
