@@ -225,3 +225,4 @@
 ---@field open? boolean For `Popover`<p>Weather the popover is open. Requires you to overwrite how the popover is shown.
 ---@field defaultOpen? boolean For `Popover`<p>Weather the popover is open by default.
 ---@field arrow? boolean|table For `Popover`<p>Weather the popover has an arrow. When table, it can be styled.
+---@field onClick? fun(id: number, name: string, event: table)
