@@ -33,7 +33,6 @@ const relevantReturnProps = [
     "selectedKeys",
     "openKeys",
     "checkedValue",
-    "target",
 ]
 
 function isStringArray(arr: any[]) {
@@ -48,18 +47,44 @@ function isStringArray(arr: any[]) {
 
 }
 
-function checkProps(props: any) {
+function checkProps(props: any, currentDepth?: number) {
     const newProps: any = {}
 
     if (isStringArray(props)) {
         return props;
     }
+    if (props == undefined) return newProps;
+    if (currentDepth == undefined) currentDepth = 0;
 
-    for (const [key, value] of Object.entries(props)) {
-        if (relevantReturnProps.includes(key)) {
-            newProps[key] = value
+    if (currentDepth > 4) return newProps;
+
+    if (Object.keys(props).length == 0) {
+        for (const key of Object.getOwnPropertyNames(props)) {
+            const value = props[key];
+            if (typeof value == "object") {
+                currentDepth++;
+                const va = checkProps(value, currentDepth);
+                if (va) {
+                    newProps[key] = va;
+                }
+            } else if (relevantReturnProps.includes(key)) {
+                newProps[key] = value
+            }
+        }
+    } else {
+        for (const [key, value] of Object.entries(props)) {
+            if (typeof value == "object") {
+                currentDepth++;
+                const va = checkProps(value, currentDepth);
+                if (va) {
+                    newProps[key] = va;
+                }
+            } else if (relevantReturnProps.includes(key)) {
+                newProps[key] = value
+            }
         }
     }
+
     return newProps
 }
 
@@ -67,7 +92,6 @@ function filterReturnProps(props: any[]) {
     let newProps: any = [];
 
     for (const prop of props) {
-        console.log(typeof prop)
         if (typeof prop !== "object") {
             newProps.push(prop);
             continue;
