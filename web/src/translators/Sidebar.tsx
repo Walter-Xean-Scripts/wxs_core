@@ -1,6 +1,6 @@
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties } from "react";
 import * as AIcon from '@ant-design/icons';
 import { fetchNui } from '../utils/fetchNui';
 import { GetBindableProps } from '../utils/getBindableProps';

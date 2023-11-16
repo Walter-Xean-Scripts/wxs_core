@@ -1,4 +1,4 @@
-import { Divider, Slider, Space } from "antd";
+import { Space } from "antd";
 import { renderElements } from "../utils/renderElement";
 import React, { CSSProperties } from "react";
 import { GetBindableProps } from "../utils/getBindableProps";

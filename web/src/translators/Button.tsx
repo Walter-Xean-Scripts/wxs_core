@@ -1,5 +1,4 @@
 import { Button } from "antd";
-import { fetchNui } from "../utils/fetchNui";
 import * as AIcon from "@ant-design/icons";
 import { GetBindableProps } from "../utils/getBindableProps";
 import { CSSProperties } from "react";

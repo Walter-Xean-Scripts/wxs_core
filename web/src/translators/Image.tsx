@@ -1,6 +1,5 @@
 import { CSSProperties } from "react";
 import { GetBindableProps } from "../utils/getBindableProps";
-import { renderElements } from "../utils/renderElement";
 
 interface IProperties extends CSSProperties {
     src?: string;

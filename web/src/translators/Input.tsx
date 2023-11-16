@@ -2,7 +2,6 @@ import Search from "antd/es/input/Search";
 import { GetBindableProps } from "../utils/getBindableProps";
 import { Input } from "antd";
 import * as AIcon from "@ant-design/icons";
-//import { SearchOutlined } from "@ant-design/icons";
 import React, { CSSProperties } from "react";
 
 interface IProperties extends CSSProperties {

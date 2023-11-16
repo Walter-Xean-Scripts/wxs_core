@@ -1,11 +1,9 @@
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, MenuProps, Space } from "antd";
-import { fetchNui } from "../utils/fetchNui";
 import * as AIcon from '@ant-design/icons';
 import { GetBindableProps } from "../utils/getBindableProps";
 import React from "react";
 import { CSSProperties } from "react";
-import { ItemType } from "antd/es/menu/hooks/useItems";
 
 interface IProperties extends CSSProperties {
     text?: string;
