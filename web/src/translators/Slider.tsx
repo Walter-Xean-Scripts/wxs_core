@@ -38,6 +38,23 @@ const supportedProps = [
     "dots",
     "range",
     "reverse",
+
+    "controlSize",
+    "dotActiveBorderColor",
+    "dotBorderColor",
+    "dotSize",
+    "handleActiveColor",
+    "handleColor",
+    "handleLineWidth",
+    "handleLineWidthHover",
+    "handleSize",
+    "handleSizeHover",
+    "railBg",
+    "railHoverBg",
+    "railSize",
+    "trackBg",
+    "trackBgDisabled",
+    "trackHoverBg",
 ]
 
 export function SliderTranslator(element: ISlider, uiName: string) {

@@ -23,7 +23,7 @@ const supportedProps = [
     "strong",
     "italic",
     "type",
-    "underline"
+    "underline",
 ]
 
 export function ParagraphTranslator(element: ITypography, uiName: string) {

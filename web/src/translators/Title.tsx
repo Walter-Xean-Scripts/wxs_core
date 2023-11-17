@@ -23,7 +23,10 @@ const supportedProps = [
     "mark",
     "italic",
     "type",
-    "underline"
+    "underline",
+
+    "titleMarginBottom",
+    "titleMarginTop",
 ]
 
 export function TitleTranslator(element: ITypography, uiName: string) {

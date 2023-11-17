@@ -37,6 +37,26 @@ const supportedProps = [
     "disabled", // boolean
     "notFoundContent", // string
     "status", // 'error' | 'warning'
+
+    "clearBg",
+    "multipleItemBg",
+    "multipleItemBorderColor",
+    "multipleItemBorderColorDisabled",
+    "multipleItemColorDisabled",
+    "multipleItemHeight",
+    "multipleItemHeightLG",
+    "multipleSelectorBgDisabled",
+    "optionActiveBg",
+    "optionFontSize",
+    "optionHeight",
+    "optionLineHeight",
+    "optionPadding",
+    "optionSelectedBg",
+    "optionSelectedColor",
+    "optionSelectedFontWeight",
+    "selectorBg",
+    "singleItemHeightLG",
+    "zIndexPopup",
 ]
 
 export function AutoCompleteTranslator(element: IAutoComplete, uiName: string) {

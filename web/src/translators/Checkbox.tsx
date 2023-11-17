@@ -34,6 +34,33 @@ const supportedProps = [
     "defaultValue",
 
     "indeterminate", // ??
+
+    "colorBgContainer",
+    "colorBgContainerDisabled",
+    "colorBorder",
+    "colorPrimary",
+    "colorPrimaryBorder",
+    "colorPrimaryHover",
+    "colorText",
+    "colorTextDisabled",
+    "colorWhite",
+    "borderRadiusSM",
+    "controlInteractiveSize",
+    "fontFamily",
+    "fontSize",
+    "fontSizeLG",
+    "lineHeight",
+    "lineType",
+    "lineWidth",
+    "lineWidthBold",
+    "lineWidthFocus",
+    "marginXS",
+    "motionDurationFast",
+    "motionDurationMid",
+    "motionDurationSlow",
+    "motionEaseInBack",
+    "motionEaseOutBack",
+    "paddingXS",
 ]
 
 export function CheckboxTranslator(element: ICheckbox, uiName: string) {
