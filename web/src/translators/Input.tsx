@@ -47,6 +47,21 @@ const supportedProps = [
     "status",
     "bordered",
     "disabled",
+    
+    "activeBg",
+    "activeBorderColor",
+    "activeShadow",
+    "addonBg",
+    "errorActiveShadow",
+    "hoverBg",
+    "hoverBorderColor",
+    "paddingBlock",
+    "paddingBlockLG",
+    "paddingBlockSM",
+    "paddingInline",
+    "paddingInlineLG",
+    "paddingInlineSM",
+    "warningActiveShadow",
 ]
 
 type IType = "Input" | "Search" | "TextArea"

@@ -5,9 +5,9 @@ import { CSSProperties } from "react";
 
 interface IProperties extends CSSProperties {
     vertical?: boolean;
-    justify?: IJustify;
-    align?: IAlign;
-    gap?: IGap;
+    justify?: "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly";
+    align?: "flex-start" | "center" | "flex-end";
+    gap?: 'small' | 'middle' | 'large' | number;
     wrap?: "wrap" | undefined;
 }
 
@@ -18,27 +18,27 @@ interface IFlex {
     children: IFoactElement[];
 }
 
-type IJustify = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly" | undefined;
-type IAlign = "flex-start" | "center" | "flex-end" | undefined;
-type IGap = 'small' | 'middle' | 'large' | number;
+const supportedProps = [
+    "vertical",
+    "wrap",
+    "justify",
+    "align",
+    "gap",
+]
 
 export function FlexTranslator(element: IFlex, uiName: string) {
-
-    const vertical: boolean = element.properties.vertical || false;
-    const justify: IJustify = element.properties.justify || undefined;
-    const align: IAlign = element.properties.align || undefined;
-    const gap: IGap = element.properties.gap || "small";
-    const wrap: "wrap" | undefined = element.properties.wrap ? "wrap" : undefined
+    let propsFromElementProps: any = {};
+    for (const prop of Object.keys(element.properties)) {
+        if (supportedProps.includes(prop)) {
+            propsFromElementProps[prop] = (element.properties as { [key: string]: any })[prop];
+        }
+    }
 
     return (
         <Flex
             key={element.id}
             style={{ ...element.properties }}
-            vertical={vertical}
-            justify={justify}
-            align={align}
-            gap={gap}
-            wrap={wrap}
+            {...propsFromElementProps}
             {...GetBindableProps(element.properties)}
         >
             {renderElements(element.children, uiName)}

@@ -1,7 +1,9 @@
 import { Button } from "antd";
 import * as AIcon from "@ant-design/icons";
 import { GetBindableProps } from "../utils/getBindableProps";
-import { CSSProperties } from "react";
+import React, { CSSProperties } from "react";
+
+type IType = "primary" | "default" | "dashed" | "text" | "link"
 
 interface IProperties extends CSSProperties {
     type?: IType;
@@ -23,32 +25,42 @@ interface IButton {
     properties: IProperties;
 }
 
-type IType = "primary" | "default" | "dashed" | "text" | "link"
+const supportedProps = [
+    "type",
+    "size",
+    "disabled",
+    "loading",
+    "ghost",
+    "block",
+    "danger",
+    "shape",
+
+    "href",
+    "htmlType",
+    "target",
+]
 
 export function ButtonTranslator(element: IButton, uiName: string) {
-    const type = element.properties.type || "default"
+    let propsFromElementProps: any = {};
+    for (const prop of Object.keys(element.properties)) {
+        if (supportedProps.includes(prop)) {
+            propsFromElementProps[prop] = (element.properties as { [key: string]: any })[prop];
+        }
+    }
 
-    const Icon = element.properties.icon ? (AIcon as { [key: string]: any })[element.properties.icon] : undefined
-    const size = element.properties.size || "default"
-    const disabled = element.properties.disabled || false
-    const loading = element.properties.loading || false
-    const ghost = element.properties.ghost || false
-    const block = element.properties.block || false
-    const danger = element.properties.danger || false
+    let Icon: React.ReactNode | undefined;
+    if (element.properties.icon) {
+        const _aicon = (AIcon as { [key: string]: any })[element.properties.icon];
+        Icon = <_aicon />
+    }
 
     return (
         <Button
             key={element.id}
             style={{ ...element.properties }}
-            type={type}
-            icon={Icon ? <Icon /> : undefined}
-            size={size}
-            disabled={disabled}
-            loading={loading}
-            ghost={ghost}
-            block={block}
-            danger={danger}
+            {...propsFromElementProps}
             {...GetBindableProps(element.properties)}
+            icon={Icon}
         >
             {
                 (element.properties.leftText) && (

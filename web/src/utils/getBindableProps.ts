@@ -107,6 +107,7 @@ function filterReturnProps(props: any[]) {
 }
 
 export function GetBindableProps(properties: any) {
+    if (!properties) return undefined;
     const newProperties: any = {};
     let i = 0;
 
