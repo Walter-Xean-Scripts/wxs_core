@@ -44,5 +44,5 @@ end)
 
 RegisterNUICallback("CallFnRef", function(body, resultCallback)
     TriggerEvent("Foact:CallFnRef", body.fnRefName, table.unpack(body.args))
-    resultCallback()
+    resultCallback(true)
 end)
