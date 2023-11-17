@@ -31,7 +31,8 @@ local function doServerCallback(_, event, cb, ...)
 
     RegisterNetEvent("WXS:CB:Response:" .. event, function(_id, ...)
         if _id ~= currentId then return end
-        promise:resolve({ callbackResponse(pcall(cb, ...)) })
+        promise:resolve(...)
+        callbackResponse(pcall(cb, ...))
     end)
 
     return promise
