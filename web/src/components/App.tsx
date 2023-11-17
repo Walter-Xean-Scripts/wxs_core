@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css'
 import { debugData } from "../utils/debugData";
 import { useNuiEvent } from '../hooks/useNuiEvent';
 import uiStore from '../stores/uis';
 import { ConfigProvider, theme } from 'antd';
 import { renderElements } from '../utils/renderElement';
+import { fetchNui } from '../utils/fetchNui';
 
 debugData([
   {
@@ -76,6 +77,10 @@ const App: React.FC = () => {
       setCurUIMakeup(uiStore.getState().uiList[data.name]);
     }
   });
+
+  useEffect(() => {
+    fetchNui("nuiReady", {});
+  }, []);
 
   return (
     <div className="nui-wrapper">
