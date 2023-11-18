@@ -2,6 +2,7 @@ import { Button } from "antd";
 import * as AIcon from "@ant-design/icons";
 import { GetBindableProps } from "../utils/getBindableProps";
 import React, { CSSProperties } from "react";
+import { IconFromString } from "../utils/IconFromString";
 
 type IType = "primary" | "default" | "dashed" | "text" | "link"
 
@@ -48,11 +49,7 @@ export function ButtonTranslator(element: IButton, uiName: string) {
         }
     }
 
-    let Icon: React.ReactNode | undefined;
-    if (element.properties.icon) {
-        const _aicon = (AIcon as { [key: string]: any })[element.properties.icon];
-        Icon = <_aicon />
-    }
+    const Icon = IconFromString(element.properties.icon);
 
     return (
         <Button

@@ -226,3 +226,17 @@
 ---@field defaultOpen? boolean For `Popover`<p>Weather the popover is open by default.
 ---@field arrow? boolean|table For `Popover`<p>Weather the popover has an arrow. When table, it can be styled.
 ---@field onClick? fun(id: number, name: string, event: table)
+---@field title? string For `Popconfirm`<p>Title of the popconfirm.
+---@field cancelTexT? string For `Popconfirm`<p>Text of the cancel button.
+---@field okText? string For `Popconfirm`<p>Text of the ok button.
+---@field description? string For `Popconfirm`<p>Description of the popconfirm.
+---@field disabled? boolean For `Popconfirm`<p>Weather the popconfirm should display.
+---@field icon? string For `Popconfirm`<p>Icon of the popconfirm.
+---@field cancelButtonProps? table For `Popconfirm`<p>Props/Styling of the cancel button.
+---@field okButtonProps? table For `Popconfirm`<p>Props/Styling of the ok button.
+---@field okType? string For `Popconfirm`<p>Type of the ok button.
+---@field showCancel? boolean For `Popconfirm`<p>Weather the cancel button should be shown.
+---@field onCancel? fun(id: number, name: string, event: table) For `Popconfirm`<p>Fires when user presses the cancel button.
+---@field onConfirm? fun(id: number, name: string, event: table) For `Popconfirm`<p>Fires when user presses the ok button.
+---@field onPopupClick? fun(id: number, name: string, event: table) For `Popconfirm`<p>Fires when user clicks anywhere within the popconfirm.
+---@field open? boolean For `Modal`<p>Controls weather the modal is open.
