@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { fetchNui } from "./fetchNui";
 
 const relevantReturnProps = [
@@ -33,6 +34,9 @@ const relevantReturnProps = [
     "selectedKeys",
     "openKeys",
     "checkedValue",
+    "date",
+    "dateString",
+    "dates",
 ]
 
 function isStringArray(arr: any[]) {
@@ -57,6 +61,12 @@ function checkProps(props: any, currentDepth?: number) {
     if (currentDepth == undefined) currentDepth = 0;
 
     if (currentDepth > 4) return newProps;
+    if (dayjs.isDayjs(props)){
+        return {
+            dateString: props.format("DD-MM-YYYY"),
+            timeString: props.format("HH:mm:ss"),
+        }
+    }
 
     if (Object.keys(props).length == 0) {
         for (const key of Object.getOwnPropertyNames(props)) {
@@ -96,6 +106,7 @@ function filterReturnProps(props: any[]) {
             newProps.push(prop);
             continue;
         };
+
 
         const va = checkProps(prop)
         if (va) {

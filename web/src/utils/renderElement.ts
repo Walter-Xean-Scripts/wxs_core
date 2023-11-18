@@ -15,6 +15,7 @@ import { CheckboxTranslator } from "../translators/Checkbox";
 import { InputTranslator } from "../translators/Input";
 import { PopoverTranslator } from "../translators/Popover";
 import { PopconfirmTranslator } from "../translators/Popconfirm";
+import { DatePickerTranslator } from "../translators/DatePicker";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return;
@@ -72,6 +73,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "Popconfirm":
                 result.push(PopconfirmTranslator(elem, uiName))
+                break;
+            case "DatePicker":
+                result.push(DatePickerTranslator(elem, uiName))
                 break;
         }
     }
