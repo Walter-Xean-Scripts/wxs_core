@@ -60,6 +60,41 @@ exports("UpdateChildren", function(uiName, elementId, children)
     })
 end)
 
+exports("SendNotification", function(type, title, message, duration, placement)
+    SendNUIMessage({
+        action = "notification",
+        data = {
+            type = type,
+            title = title,
+            message = message,
+            duration = duration,
+            placement = placement
+        }
+    })
+end)
+
+RegisterNetEvent("WXSCore:Client:Notification", function(type, title, message, duration, placement)
+    SendNUIMessage({
+        action = "notification",
+        data = {
+            type = type,
+            title = title,
+            message = message,
+            duration = duration,
+            placement = placement
+        }
+    })
+end)
+
+
+RegisterKeyMapping("clearNotifs", "Clear Notifications", "keyboard", "delete")
+RegisterCommand("clearNotifs", function()
+    SendNUIMessage({
+        action = "clearNotifications",
+        data = true
+    })
+end, false)
+
 RegisterNUICallback("CallFnRef", function(body, resultCallback)
     TriggerEvent("Foact:CallFnRef", body.fnRefName, table.unpack(body.args))
     resultCallback(true)

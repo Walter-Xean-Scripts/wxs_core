@@ -3,20 +3,25 @@ import './App.css'
 import { debugData } from "../utils/debugData";
 import { useNuiEvent } from '../hooks/useNuiEvent';
 import uiStore from '../stores/uis';
-import { ConfigProvider, theme } from 'antd';
+import { ConfigProvider, notification, theme } from 'antd';
 import { renderElements } from '../utils/renderElement';
 import { fetchNui } from '../utils/fetchNui';
+import { NotificationPlacement } from 'antd/es/notification/interface';
 
-debugData([
-  {
-    action: 'setVisible',
-    data: true,
-  }
-])
+interface INotificationEvent {
+  type: "success" | "error" | "info" | "warning";
+  title: string;
+  message: string;
+  placement?: NotificationPlacement;
+  duration?: number;
+}
 
 const App: React.FC = () => {
   const [currentUI, setCurrentUI] = useState<string | null>(null);
   const [curUIMakeup, setCurUIMakeup] = useState<IFoactElement | undefined>();
+  const [api, contextHolder] = notification.useNotification({
+    stack: false,
+  });
 
   useNuiEvent<ILoadUIData>("loadUI", (data) => {
     uiStore.dispatch({
@@ -78,21 +83,36 @@ const App: React.FC = () => {
     }
   });
 
+  useNuiEvent<INotificationEvent>("notification", (data) => {
+    api[data.type]({
+      message: data.title,
+      description: data.message,
+      duration: data.duration || 5,
+      placement: data.placement || "topRight"
+    });
+  });
+
+  useNuiEvent("clearNotifications", () => {
+    notification.destroy();
+  })
+
   useEffect(() => {
     fetchNui("nuiReady", {});
   }, []);
 
   return (
     <div className="nui-wrapper">
-      {currentUI && (
-        <ConfigProvider
-          theme={{
-            algorithm: theme.darkAlgorithm // todo: make this configurable by the creator?
-          }}
-        >
-          {renderElements([curUIMakeup], currentUI)}
-        </ConfigProvider>
-      )}
+      <ConfigProvider
+        theme={{
+          algorithm: theme.darkAlgorithm
+        }}
+      >
+        {contextHolder}
+
+        {currentUI && (
+          renderElements([curUIMakeup], currentUI)
+        )}
+      </ConfigProvider>
     </div>
   );
 }
