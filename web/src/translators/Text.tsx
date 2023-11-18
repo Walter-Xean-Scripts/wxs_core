@@ -2,7 +2,7 @@ import { Typography } from "antd";
 import { GetBindableProps } from "../utils/getBindableProps";
 import React, { CSSProperties } from "react";
 import * as AIcon from "@ant-design/icons";
-import { IconFromString } from "../utils/getIcon";
+import { IconFromString } from "../utils/IconFromString";
 
 type ICopyable = boolean | {
     text?: string;

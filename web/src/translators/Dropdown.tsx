@@ -4,7 +4,7 @@ import * as AIcon from '@ant-design/icons';
 import { GetBindableProps } from "../utils/getBindableProps";
 import React from "react";
 import { CSSProperties } from "react";
-import { IconFromString } from "../utils/getIcon";
+import { IconFromString } from "../utils/IconFromString";
 
 type IType = "button" | undefined;
 

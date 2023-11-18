@@ -14,6 +14,7 @@ import { AutoCompleteTranslator } from "../translators/AutoComplete";
 import { CheckboxTranslator } from "../translators/Checkbox";
 import { InputTranslator } from "../translators/Input";
 import { PopoverTranslator } from "../translators/Popover";
+import { PopconfirmTranslator } from "../translators/Popconfirm";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return;
@@ -68,6 +69,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "Popover":
                 result.push(PopoverTranslator(elem, uiName))
+                break;
+            case "Popconfirm":
+                result.push(PopconfirmTranslator(elem, uiName))
                 break;
         }
     }
