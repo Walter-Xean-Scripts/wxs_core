@@ -8,6 +8,7 @@ version '1.0.0'
 lua54 'yes'
 
 client_scripts {
+  '@wxs_core/main.lua',
   'client/*.lua',
 }
 

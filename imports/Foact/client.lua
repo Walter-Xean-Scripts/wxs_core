@@ -219,6 +219,9 @@ end
 ---@param focus boolean
 function Foact:SetActive(active, focus)
     exports.wxs_core:SetActive(self.uiName, active, focus)
+    if focus == false then
+        SetNuiFocusKeepInput(active)
+    end
 end
 
 return Foact
