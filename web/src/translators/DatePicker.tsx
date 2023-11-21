@@ -1,6 +1,6 @@
 import { GetBindableProps } from "../utils/getBindableProps";
 import { DatePicker, Divider } from "antd";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect } from "react";
 import { renderElements } from "../utils/renderElement";
 import { IconFromString } from "../utils/IconFromString";
 import { StepForwardOutlined } from "@ant-design/icons";
@@ -107,9 +107,8 @@ export function DatePickerTranslator(element: IDatePicker, uiName: string) {
             propsFromElementProps[prop] = (element.properties as { [key: string]: any })[prop];
         }
     }
-    
+
     let format = element.properties.format || "DD-MM-YYYY";
-    if (element.properties.showTime) element.properties.format = format + " HH:mm:ss";
 
     let defaultValue: Dayjs | Dayjs[] | undefined;
     if (element.properties.defaultValue) {
