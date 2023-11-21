@@ -239,4 +239,33 @@
 ---@field onCancel? fun(id: number, name: string, event: table) For `Popconfirm`<p>Fires when user presses the cancel button.
 ---@field onConfirm? fun(id: number, name: string, event: table) For `Popconfirm`<p>Fires when user presses the ok button.
 ---@field onPopupClick? fun(id: number, name: string, event: table) For `Popconfirm`<p>Fires when user clicks anywhere within the popconfirm.
+---@field title? string For `Tooltip`<p>Title of the tooltip.
+---@field arrow? boolean|table For `Tooltip`<p>Weather the tooltip has an arrow. When table, it can be styled.
+---@field color? string For `Tooltip`<p>Background color of the tooltip.
+---@field defaultOpen? boolean For `Tooltip`<p>Weather the tooltip is open by default.
+---@field mouseEnterDelay? number For `Tooltip`<p>Delay in seconds before the tooltip is shown.
+---@field mouseLeaveDelay? number For `Tooltip`<p>Delay in seconds before the tooltip is hidden.
+---@field overlayStyle? table For `Tooltip`<p>CSS Properties for the tooltip card (behind visible element).
+---@field overlayInnerStyle? table For `Tooltip`<p>CSS Properties for the visible tooltip card.
+---@field placement? string For `Tooltip`<p>Placement of the tooltip.
+---@field trigger? "hover" | "focus" | "click" | "contentMenu" For `Tooltip`<p>How the tooltip is triggered.
+---@field open? boolean For `Tooltip`<p>Weather the tooltip is open. Requires you to overwrite how the tooltip is shown.
+---@field onOpenChange? fun(id: number, name: string, open: boolean) For `Tooltip`<p>Fires when tooltip is opened or closed.
 ---@field open? boolean For `Modal`<p>Controls weather the modal is open.
+---@field title? string For `Modal`<p>Title of the modal.
+---@field cancelButtonProps? table For `Modal`<p>Props/Styling of the cancel button.
+---@field cancelText? string For `Modal`<p>Text of the cancel button.
+---@field centered? boolean For `Modal`<p>Weather the modal is centered to users screen.
+---@field closeIcon? string For `Modal`<p>Icon of the close button.
+---@field confirmLoading? boolean For `Modal`<p>"Loading visual effect for OK button or not"
+---@field keyboard? boolean For `Modal`<p>Weather the user can use the keyboard to interact with the modal.
+---@field mask? boolean For `Modal`<p>Weather the modal has a mask.
+---@field okButtonProps? table For `Modal`<p>Props/Styling of the ok button.
+---@field okText? string For `Modal`<p>Text of the ok button.
+---@field okType? string For `Modal`<p>Type of the ok button.
+---@field autoFocusButton? nil|"ok"|"cancel" For `Modal`<p>Which button should be focused when modal is opened.
+---@field icon? string For `Modal`<p>Icon of the modal. Not shown?.?.?
+---@field onOk? fun(id: number, name: string, event: table) For `Modal`<p>Fires when user presses the ok button.
+---@field onCancel? fun(id: number, name: string, event: table) For `Modal`<p>Fires when user presses the cancel button.
+---@field afterClose? fun(id: number, name: string) For `Modal`<p>Fires when modal is closed.
+---@field afterOpenChange? fun(id: number, name: string, open: boolean) For `Modal`<p>Fires when modal is opened or closed.

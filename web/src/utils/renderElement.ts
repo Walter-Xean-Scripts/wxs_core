@@ -16,9 +16,13 @@ import { InputTranslator } from "../translators/Input";
 import { PopoverTranslator } from "../translators/Popover";
 import { PopconfirmTranslator } from "../translators/Popconfirm";
 import { DatePickerTranslator } from "../translators/DatePicker";
+import { SpinTranslator } from "../translators/Spin";
+import { TooltipTranslator } from "../translators/Tooltip";
+import { ModalTranslator } from "../translators/Modal";
+import { TableTranslator } from "../translators/Table";
 
 export function renderElements(elements: any, uiName: string) {
-    if (!elements) return;
+    if (!elements) return undefined;
 
     const result = [];
     for (const elem of elements) {
@@ -76,6 +80,18 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "DatePicker":
                 result.push(DatePickerTranslator(elem, uiName))
+                break;
+            case "Spin":
+                result.push(SpinTranslator(elem, uiName))
+                break;
+            case "Tooltip":
+                result.push(TooltipTranslator(elem, uiName))
+                break;
+            case "Modal":
+                result.push(ModalTranslator(elem, uiName))
+                break;
+            case "Table":
+                result.push(TableTranslator(elem, uiName))
                 break;
         }
     }
