@@ -190,12 +190,8 @@ function Foact:createElement(elementName, properties, children)
             end
         end,
         __newindex = function(tbl, key, value)
-            if properties[key] ~= nil then
-                rawset(tbl.properties, key, value)
-                exports.wxs_core:UpdateUI(self.uiName, newId, key, value)
-            else
-                rawset(tbl, key, value)
-            end
+            rawset(tbl.properties, key, value)
+            exports.wxs_core:UpdateUI(self.uiName, newId, key, value)
         end
     })
 
