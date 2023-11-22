@@ -269,3 +269,11 @@
 ---@field onCancel? fun(id: number, name: string, event: table) For `Modal`<p>Fires when user presses the cancel button.
 ---@field afterClose? fun(id: number, name: string) For `Modal`<p>Fires when modal is closed.
 ---@field afterOpenChange? fun(id: number, name: string, open: boolean) For `Modal`<p>Fires when modal is opened or closed.
+---@field checked? boolean For `Switch`<p>Weather the switch is checked.
+---@field defaultChecked? boolean For `Switch`<p>Weather the switch is checked by default.
+---@field disabled? boolean For `Switch`<p>Weather the switch is disabled.
+---@field loading? boolean For `Switch`<p>Weather the switch is loading.
+---@field size? "default"|"small" For `Switch`<p>Sets the size of the switch.
+---@field autoFocus? boolean For `Switch`<p>Focuses the element when its shown
+---@field checkedChildren? string|table For `Switch`<p>String or icon shown when switch is checked.
+---@field unCheckedChildren? string|table For `Switch`<p>String or icon shown when switch is unchecked.

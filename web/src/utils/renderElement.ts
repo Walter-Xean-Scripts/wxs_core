@@ -20,6 +20,7 @@ import { SpinTranslator } from "../translators/Spin";
 import { TooltipTranslator } from "../translators/Tooltip";
 import { ModalTranslator } from "../translators/Modal";
 import { TableTranslator } from "../translators/Table";
+import { SwitchTranslator } from "../translators/Switch";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return undefined;
@@ -92,6 +93,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "Table":
                 result.push(TableTranslator(elem, uiName))
+                break;
+            case "Switch":
+                result.push(SwitchTranslator(elem, uiName))
                 break;
         }
     }
