@@ -1,7 +1,24 @@
-local _require = require
+--[[
+    If anyone reads this - I'd like to credit OXLib for this code.
+    Link to them here: https://github.com/overextended
+]]
 local loaded = {}
-local path = './?.lua;'
+local resourceName = "wxs_core"
 
+package = {
+    loaded = setmetatable({}, {
+        __index = loaded,
+        __newindex = function() end,
+        __metatable = false,
+    }),
+    path = './?.lua;'
+}
+
+local _require = require
+
+---Loads the given module inside the current resource, returning any values returned by the file or `true` when `nil`.
+---@param modname string
+---@return unknown?
 function require(modname)
     if type(modname) ~= 'string' then return end
 
@@ -20,9 +37,25 @@ function require(modname)
     local resourceSrc
 
     if not modpath:find('^@') then
-        resourceSrc = GetCurrentResourceName()
+        local idx = 1
 
-        if resourceSrc ~= "wxs_core" then
+        while true do
+            local di = debug.getinfo(idx, 'S')
+
+            if di then
+                if not di.short_src:find('^@wxs_core/imports/Require') and not di.short_src:find('^%[C%]') and not di.short_src:find('^citizen') and di.short_src ~= '?' then
+                    resourceSrc = di.short_src:gsub('^@(.-)/.+', '%1')
+                    break
+                end
+            else
+                resourceSrc = resourceName
+                break
+            end
+
+            idx += 1
+        end
+
+        if resourceSrc ~= resourceName then
             modname = ('@%s.%s'):format(resourceSrc, modname)
         end
     end
@@ -37,7 +70,7 @@ function require(modname)
             modpath = modpath:sub(#resourceSrc + 3)
         end
 
-        for path in path:gmatch('[^;]+') do
+        for path in package.path:gmatch('[^;]+') do
             local scriptPath = path:gsub('?', modpath):gsub('%.+%/+', '')
             local resourceFile = LoadResourceFile(resourceSrc, scriptPath)
 
