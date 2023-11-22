@@ -1,3 +1,5 @@
+---@diagnostic disable: duplicate-doc-field
+
 ---@class AnimDirs
 ---@field id number
 ---@field dir string | nil
@@ -184,7 +186,7 @@
 ---@field notFoundContent? string For `AutoComplete`<p>String showed when no suggestion macthes the users input.
 ---@field status? "error" | "warning" For `AutoComplete`<p>Sets the outliune of the autocomplete
 ---@field onBlur? fun() For `AutoComplete`<p>Fired when the autocomplete is focused.
----@field onChange? fun(id: number, uiName: string, value: strung) For `AutoComplete`<p>Fires when user changes input
+---@field onChange? fun(id: number, uiName: string, value: string) For `AutoComplete`<p>Fires when user changes input
 ---@field onDropdownVisibleChange? fun(id: number, uiName: string, open: boolean) For `AutoComplete`<p>Fires when user opens/closes the popup
 ---@field onFocus? fun() For `AutoComplete`<p>Fires when user clicks/focuses the autocomplete
 ---@field onSearch? fun(id: number, uiName: string, value: string) For `AutoComplete`<p>Works like onChange()...
