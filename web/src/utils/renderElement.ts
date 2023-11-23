@@ -21,6 +21,7 @@ import { TooltipTranslator } from "../translators/Tooltip";
 import { ModalTranslator } from "../translators/Modal";
 import { TableTranslator } from "../translators/Table";
 import { SwitchTranslator } from "../translators/Switch";
+import { IconTranslator } from "../translators/Icon";
 
 export function renderElements(elements: any, uiName: string) {
     if (!elements) return undefined;
@@ -96,6 +97,9 @@ export function renderElements(elements: any, uiName: string) {
                 break;
             case "Switch":
                 result.push(SwitchTranslator(elem, uiName))
+                break;
+            case "Icon":
+                result.push(IconTranslator(elem, uiName))
                 break;
         }
     }
