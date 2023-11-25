@@ -73,9 +73,6 @@ export function SliderTranslator(element: ISlider, uiName: string) {
             key={element.id}
             style={{ ...element.properties }}
             {...propsFromElementProps}
-            onChange={(value) => { fetchNui("SliderChange", { id: element.id, name: uiName, value: value }) }}
-            onAfterChange={(value) => { fetchNui("SliderAfterChange", { id: element.id, name: uiName, value: value }) }}
-
             tooltip={{
                 open: tooltipOpen,
                 placement: tooltipPlacement,
