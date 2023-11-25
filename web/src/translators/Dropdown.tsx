@@ -1,31 +1,41 @@
 import { DownOutlined } from "@ant-design/icons";
-import { Dropdown, MenuProps, Space } from "antd";
-import * as AIcon from '@ant-design/icons';
+import { Button, Dropdown, MenuProps, Space } from "antd";
 import { GetBindableProps } from "../utils/getBindableProps";
 import React from "react";
 import { CSSProperties } from "react";
 import { IconFromString } from "../utils/IconFromString";
 
-type IType = "button" | undefined;
+type IDropdownType = "button" | "default";
+type IButtonType = "primary" | "default" | "dashed" | "link" | "text";
 
 interface IProperties extends CSSProperties {
     text?: string;
-    trigger?: "hover" | "click" | "contextMenu";
-    type?: IType;
-    selectable?: boolean;
-    defaultSelectedKeys?: string[];
-    multiple?: boolean;
-    triggerSubMenuAction?: "hover" | "click";
-    menuEvents?: any;
-    items?: any;
-    placement?: "topLeft" | "topCenter" | "topRight" | "bottomLeft" | "bottomCenter" | "bottomRight" | "top" | "bottom";
+    items?: MenuProps['items'];
+    type?: IDropdownType;
+    buttonType?: IButtonType;
+    buttonStyle?: CSSProperties;
+    buttonProps?: any;
+    placement?: "bottomLeft"|"bottom"|"bottomRight"|"topLeft"|"top"|"topRight";
+    arrow?: boolean | {pointAtCenter: boolean};
+    trigger?: "click"|"hover"|"contextMenu";
+    loading?: boolean;
+    open?: boolean;
     autoFocus?: boolean;
     disabled?: boolean;
-    arrow?: boolean | { pointAtCenter?: boolean | undefined; };
-    autoAdjustOverflow?: any;
-    menu?: any;
+    menu?: MenuProps;
     overlayStyle?: CSSProperties;
+    
+    autoAdjustOverflow?: boolean;
+    destroyPopupOnHide?: boolean;
+    
+    // .Button:
+    danger?: boolean;
     icon?: string;
+    size?: "large" | "middle" | "small";
+    menuButtonType?: IButtonType;
+
+    //buttonsRender...
+    //dropdownRender...
 }
 
 interface IDropdown {
@@ -35,23 +45,35 @@ interface IDropdown {
 }
 
 const supportedProps = [
+    "text",
+    "items",
+    "type",
+    //"buttonType",
+    //"buttonStyle",
+    //"buttonProps",
     "placement",
+    "arrow",
+    "trigger",
+    "loading",
+    "open",
     "autoFocus",
     "disabled",
-    "trigger",
-    "arrow",
-    "open",
-    "laoding",
-    "danger",
-    "type",
-
-    "autoAdjustOverflow",
     "menu",
     "overlayStyle",
+    "danger",
+    "icon",
+    "size",
+    "menuButtonType",
+
+    "autoAdjustOverflow",
+    "destroyPopupOnHide",
 ]
 
 export function DropdownTranslator(element: IDropdown, uiName: string) {
-    if (!element.properties.items) return null;
+    if (!element.properties.items) {
+        console.log("Dropdown: `items` was not defined.")
+        return undefined;
+    }
 
     let propsFromElementProps: any = {};
     for (const prop of Object.keys(element.properties)) {
@@ -60,73 +82,68 @@ export function DropdownTranslator(element: IDropdown, uiName: string) {
         }
     }
 
-    const items: MenuProps['items'] = [];
-    for (let item of element.properties.items) {
-        const Icon = item.icon ? (AIcon as { [key: string]: any })[item.icon] : undefined
-        items.push({ ...item, icon: Icon ? <Icon /> : undefined })
+    // Dropdown Type
+    const type: IDropdownType = element.properties.type || "default";
+
+    // Button Type & Style
+    const buttonType: IButtonType = element.properties.buttonType || "default";
+    const buttonStyle = element.properties.buttonStyle;
+    const buttonProps = element.properties.buttonProps;
+
+    // Items Handling:
+    const items: MenuProps['items'] = element.properties.items;
+
+    // Menu Props
+    let fixedExtraProps: any = {}
+    if (element.properties.menu) {
+        if (typeof element.properties.menu.expandIcon == "string")
+            fixedExtraProps["expandIcon"] = IconFromString(element.properties.menu.expandIcon)
+        // More?...
     }
-
-    const type: IType = element.properties.type || undefined; // "button" | undefined
-    
-    const selectable = element.properties.selectable || false;
-    const defaultSelectedKeys = element.properties.defaultSelectedKeys || undefined;
-    const multiple = element.properties.multiple || true;
-    const triggerSubMenuAction = element.properties.triggerSubMenuAction || "hover";
-
-    let overlayStyle: CSSProperties | undefined;
-    if (element.properties.overlayStyle) overlayStyle = element.properties.overlayStyle;
-
-    const icon = element.properties.icon ? IconFromString(element.properties.icon) : undefined;
-
+    const menuProps: MenuProps = {
+        items: items,
+        ...element.properties.menu,
+        ...fixedExtraProps,
+        ...GetBindableProps(element.properties.menu)
+    }
     return (
         <React.Fragment key={`fragment.dropdown-${element.id}`}>
-            {!type && (
+            {type == "default" && (
                 <Dropdown
                     key={element.id}
-                    menu={{
-                        items,
-                        multiple: multiple,
-                        selectable: selectable,
-                        defaultSelectedKeys: defaultSelectedKeys,
-                        triggerSubMenuAction: triggerSubMenuAction,
-                        ...GetBindableProps(element.properties.menuEvents),
-                    }}
+                    style={{ ...element.properties }}
                     {...propsFromElementProps}
                     {...GetBindableProps(element.properties)}
-                    overlayStyle={overlayStyle}
+                    menu={menuProps}
                 >
-                    <a onClick={(e) => e.preventDefault()}>
+                    <Button
+                        key={"dropdown-button-" + element.id}
+                        style={{ ...buttonStyle }}
+                        type={buttonType}
+                        {...buttonProps}
+                        {...GetBindableProps(element.properties.buttonProps)}
+                    >
                         <Space>
                             {element.properties.text}
                             <DownOutlined />
                         </Space>
-                    </a>
+                    </Button>
                 </Dropdown>
             )}
-
             {type == "button" && (
                 <Dropdown.Button
                     key={element.id}
-                    menu={{
-                        items,
-                        selectable: selectable,
-                        defaultSelectedKeys: defaultSelectedKeys,
-                        multiple: multiple,
-                        triggerSubMenuAction: triggerSubMenuAction,
-                        ...GetBindableProps(element.properties)
-                    }}
+                    style={{ ...element.properties }}
                     {...propsFromElementProps}
                     {...GetBindableProps(element.properties)}
-                    overlayStyle={overlayStyle}
-                    icon={icon}
+                    menu={menuProps}
+                    icon={IconFromString(element.properties.icon)}
+                    type={element.properties.menuButtonType}
                 >
-                    <a onClick={(e) => e.preventDefault()}>
-                        <Space>
-                            {element.properties.text}
-                        </Space>
-                    </a>
+                    {element.properties.text}
                 </Dropdown.Button>
             )}
         </React.Fragment>
+    
     )
 }
