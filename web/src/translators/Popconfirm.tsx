@@ -7,7 +7,8 @@ import { TooltipPlacement } from "antd/es/tooltip";
 
 interface IProperties extends CSSProperties {
     title?: string;
-    description?:  string;
+    description?:  string | string[];
+    descriptionStyle: CSSProperties;
     okText?: string;
     cancelText?: string;
     placement?: TooltipPlacement;
@@ -48,6 +49,22 @@ export function PopconfirmTranslator(element: ITypography, uiName: string) {
         }
     }
 
+    // Description Handle
+    let description: React.ReactNode = element.properties.description;
+    const descriptionStyle: CSSProperties = element.properties.descriptionStyle || {margin: 0}
+    if (element.properties.description) {
+        const _description = element.properties.description
+        if (typeof _description === "object") {
+            description = (
+                <div>
+                    {_description.map((child: string, index: number) => {
+                        return <div key={index} style={descriptionStyle}>{child}</div>
+                    })}
+                </div>
+            )
+        }
+    }
+
     const icon = IconFromString(element.properties.icon);
 
     let cancelButtonProps: ButtonProps | undefined = undefined;
@@ -75,6 +92,7 @@ export function PopconfirmTranslator(element: ITypography, uiName: string) {
             icon={icon}
             okButtonProps={okButtonProps}
             cancelButtonProps={cancelButtonProps}
+            description={description}
         >
             {renderElements(element.children, uiName)}
         </Popconfirm>
